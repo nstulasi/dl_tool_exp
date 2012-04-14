@@ -1,6 +1,8 @@
-<h1>Editing project</h1>
+<div class="grid_4 layout">
+	<%= render 'projects_sidemenu'%>
+</div>
+<div class ="grid_12 layout" id="right_display">
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @project %> |
+<%=render 'project_user' %>	
 <%= link_to 'Back', projects_path %>
+</div>

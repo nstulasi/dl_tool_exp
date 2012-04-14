@@ -219,6 +219,11 @@ a.active{background-position: -659px -60px;
 #right_display{
 	float:right;
 }
+
+.box_1{
+	height:150px;
+	margin-bottom:10px;
+}
 #nav_bar{
 	vertical-align:top;
 	width:85%;

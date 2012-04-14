@@ -1,24 +1,19 @@
-<div id="menu">
- <ul class="navmenu">
-   <li><div class="menutop"><a href="#">Posts</a><div class="toggle">+</div></div>
+<!--Got to clean up this code -->
+<%@uniq_roles = Delegation.find(:all,:group=>:role)%>
+<div id="menu">       
+ <ul class="navmenu">	
+ <%@uniq_roles.each do |r|%>
+   <li><div class="menutop"><a href="#"><%=r.role%></a><div class="toggle">+</div></div>
      <ul class="submenu">
-       <li><a href="#">Add New</a></li>
-       <li><a href="#">Tags</a></li>
+     	<%@del = Delegation.find(:all,:conditions=>["role=?",r.role])%>
+     	<%@del.each do |d|%>
+     	<%@u=User.find(:all,:conditions=>["id=?",d.user_id])%>
+     	<%@u.each do |u|%>
+       <li><a href="#"><%=u.name%></a></li>
+       <%end%>
+       <%end%>
      </ul>
-   </li>
-   <li><div class="menutop"><a href="#">Pages</a><div class="toggle">+</div></div>
-     <ul class="submenu">
-       <li><a href="#">Add New</a></li>
-       <li><a href="#">Edit</a></li>
-     </ul>
-   </li>
-   <li><div class="menutop menusingle"><a href="#">Comments</a></div></li>
-   <li><div class="menutop"><a href="#">Users</a><div class="toggle">+</div></div>
-     <ul class="submenu">
-       <li><a href="#">Manage</a></li>
-       <li><a href="#">Add New</a></li>
-       <li><a href="#">Profile</a></li>
-     </ul>
-   </li>
+    </li>
+   <%end%>
  </ul>
  </div>

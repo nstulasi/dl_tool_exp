@@ -11,12 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120408212144) do
+ActiveRecord::Schema.define(:version => 20120410135415) do
 
   create_table "articles", :force => true do |t|
     t.string   "name"
     t.datetime "start_at"
     t.datetime "end_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "assignments", :force => true do |t|
+    t.integer  "delegation_id"
+    t.integer  "task_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "delegations", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.string   "role"
+    t.string   "responsibility"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -27,11 +43,21 @@ ActiveRecord::Schema.define(:version => 20120408212144) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "end_at"
+    t.integer  "project_id"
   end
 
   create_table "policies", :force => true do |t|
     t.string   "name"
     t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects", :force => true do |t|
+    t.string   "name"
+    t.string   "time"
+    t.string   "money"
+    t.string   "funding_agency"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

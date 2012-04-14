@@ -3,10 +3,12 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 5, :page=>params[:page])
+    @tasks = current_tasks
+    @tasks = @tasks.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 5, :page=>params[:page])unless @tasks.nil?
+   
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @tasks }
+     format.html # index.html.erb
+    format.json { render json: @tasks }
     end   
   end
 
@@ -34,7 +36,7 @@ end
   # GET /tasks/new.json
   def new
     @task = Task.new
-
+    3.times{@task.assignments.build}
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @task }
@@ -50,9 +52,12 @@ end
   # POST /tasks.json
   def create
     @task = Task.new(params[:task])
-
     respond_to do |format|
       if @task.save
+        @del = Delegation.find_by_user_id(params[:user][:id])
+        @task.assignments.each do|a|
+        a.update_attribute(:delegation_id,@del.id) unless @del.nil?
+        end
         format.html { redirect_to @task, notice: 'Task was successfully created.' }
         format.json { render json: @task, status: :created, location: @task }
       else

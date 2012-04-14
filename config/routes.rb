@@ -36,6 +36,7 @@ SampleApp::Application.routes.draw do
   
   root :to => 'pages#home'
   
+  match '/projects/new_user', :to=>'projects#new_user'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

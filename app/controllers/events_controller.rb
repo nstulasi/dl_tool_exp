@@ -2,34 +2,32 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
- 
     @month = (params[:month] || (Time.zone || Time).now.month).to_i
     @year = (params[:year] || (Time.zone || Time).now.year).to_i
-
     @shown_month = Date.civil(@year, @month)
-
-    @event_strips = Event.event_strips_for_month(@shown_month)
+    #Displaying only current project's events
+    @event_strips = current_project.events.event_strips_for_month(@shown_month)
+    
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @event }
+      format.json { render json: @event } 
     end
   end
 
   # GET /events/new
   # GET /events/new.json
   def new
-    @event = Event.new
-
+    @project = current_project
+     1.times{@project.events.build}  
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @event }
+      format.json { render json: @project.events }
     end
   end
 
@@ -41,8 +39,8 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(params[:event])
-
+    @project = current_project
+    @event = @project.events.create(params[:event])
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }

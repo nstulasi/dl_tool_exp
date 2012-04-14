@@ -7,4 +7,10 @@
 <ul class="users">
  		<%= render @users %>	
 </ul>
+<h2>Project users in this project</h2>
+<ul>
+ <%@proj_users.each do |r|%>
+ <li><%=r[:name]%></li>	
+ <%end%>
+</ul>
 </div>

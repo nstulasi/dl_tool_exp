@@ -3,8 +3,10 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.all
-
-    respond_to do |format|
+    if current_project
+      @open_project = current_project.name
+    end
+     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @projects }
     end
@@ -14,7 +16,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
-
+    cookies.permanent.signed[:open_project] = @project.id
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }
@@ -25,7 +27,6 @@ class ProjectsController < ApplicationController
   # GET /projects/new.json
   def new
     @project = Project.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @project }
@@ -41,11 +42,12 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(params[:project])
-
+    #@user.project_user = params[:user][:delegations_attributes].nil?
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
+        cookies.permanent[:open_project] = @project.id
       else
         format.html { render action: "new" }
         format.json { render json: @project.errors, status: :unprocessable_entity }
@@ -73,6 +75,7 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1.json
   def destroy
     @project = Project.find(params[:id])
+    cookies.delete(:open_project)
     @project.destroy
 
     respond_to do |format|

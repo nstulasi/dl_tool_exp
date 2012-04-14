@@ -63,7 +63,7 @@ body {
 .grid_12 {
   display: inline;
   float: left;
-  height:650px;
+ /**height:650px;**/
   margin-right: 10px;
 }
 
