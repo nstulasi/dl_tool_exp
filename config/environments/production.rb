@@ -4,6 +4,7 @@ SampleApp::Application.configure do
   # Code is not reloaded between requests
     config.assets.precompile += %w( blueprint/screen.css )
 config.assets.precompile += %w( blueprint/print.css )
+config.serve_static_assets = true
   config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
