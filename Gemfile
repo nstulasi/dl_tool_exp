@@ -16,7 +16,9 @@ gem 'event-calendar', :require => 'event_calendar'
 gem 'meta_search'
 gem 'simple_datatables'
 
-gem 'pg',:group => :production
+group :production do
+gem 'pg'
+end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

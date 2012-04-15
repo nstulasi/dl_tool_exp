@@ -2,7 +2,8 @@ SampleApp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
-    config.assets.precompile =true
+    config.assets.precompile += %w( blueprint/screen.css )
+config.assets.precompile += %w( blueprint/print.css )
   config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
