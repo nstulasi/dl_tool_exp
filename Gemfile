@@ -11,16 +11,12 @@ gem 'sqlite3', '1.3.4'
 gem 'gravatar_image_tag', '0.1.0'
 gem 'faker', '0.3.1'
 gem 'will_paginate','3.0.pre2'
-gem 'pg'
 gem 'formtastic'
 gem 'event-calendar', :require => 'event_calendar'
 gem 'meta_search'
 gem 'simple_datatables'
 
-group :production do
-  # gems specifically for Heroku go here
-  gem "pg"
-end
+gem 'pg',:group => :production
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
