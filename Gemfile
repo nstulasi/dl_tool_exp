@@ -19,6 +19,7 @@ gem 'simple_datatables'
 group :production do
 gem 'pg', "~> 0.13.2"
 gem 'thin'
+gem 'execjs'
 end
 
 group :development do
