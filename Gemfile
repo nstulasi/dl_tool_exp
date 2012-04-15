@@ -5,7 +5,7 @@ gem 'rails', '3.1.3'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-#gem 'sqlite3', '1.3.4'
+
 
 #Extras
 gem 'gravatar_image_tag', '0.1.0'
@@ -17,7 +17,12 @@ gem 'meta_search'
 gem 'simple_datatables'
 
 group :production do
-gem "pg", "~> 0.13.2"
+gem 'pg', "~> 0.13.2"
+gem 'thin'
+end
+
+group :development do
+gem 'sqlite3', '1.3.4'
 end
 # Gems used only for assets and not required
 # in production environments by default.
